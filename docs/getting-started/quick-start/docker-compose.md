@@ -43,10 +43,11 @@ Add or update the following configuration items in the configuration file `/etc/
 }
 ```
 
-Restart Docker Daemon
+Restart Docker Daemon and Dragonfly
 
 ```bash
 systemctl restart docker
+./run.sh
 ```
 
 > **Tips**：
@@ -70,7 +71,7 @@ docker pull nginx:latest
 You can verify that the nginx image is transferred through Dragonfly by executing the following command.
 
 ```bash
-docker exec dfdaemon grep "peer task done" /var/log/dragonfly/daemon/core.log
+docker compose exec dfdaemon grep "peer task done" /var/log/dragonfly/daemon/core.log
 ```
 
 If the above command has something like

@@ -40,10 +40,11 @@ export IP=<host ip>
 }
 ```
 
-重启 Docker Daemon
+重启 Docker Daemon 和 Dragonfly
 
 ```bash
 systemctl restart docker
+./run.sh
 ```
 
 > **提示**：
@@ -67,7 +68,7 @@ docker pull nginx:latest
 您可以通过执行以下命令，检验 nginx 镜像是否通过 Dragonfly 来传输完成。
 
 ```bash
-docker exec dfdaemon grep "peer task done" /var/log/dragonfly/daemon/core.log
+docker compose exec dfdaemon grep "peer task done" /var/log/dragonfly/daemon/core.log
 ```
 
 如果以上命令有诸如
