@@ -1,15 +1,12 @@
 ---
 id: singularity-proxy
-title: Http proxy mode
+title: HTTP Proxy Mode
 slug: /setup/runtime/singularity/proxy
 ---
 
-
 Uses dfget daemon as http proxy for Singularity/Apptainer.
 
-## Quick Start {#quick-start}
-
-### Step 1: Generate CA certificate for HTTP proxy {#step-1-generate-ca-certificate-for-http-proxy}
+## Step 1: Generate CA certificate for HTTP proxy {#step-1-generate-ca-certificate-for-http-proxy}
 
 Generate an RSA private key.
 
@@ -60,7 +57,7 @@ openssl x509 -req -days 36500 -extfile openssl.conf \
     -extensions v3_ca -in ca.csr -signkey ca.key -out ca.crt
 ```
 
-### Step 2: Configure dfget daemon {#step-2-configure-dfget-daemon}
+## Step 2: Configure dfget daemon {#step-2-configure-dfget-daemon}
 
 To use dfget daemon as HTTP proxy, first you need to append a proxy rule in
 `/etc/dragonfly/dfget.yaml`, This will proxy
@@ -68,39 +65,39 @@ To use dfget daemon as HTTP proxy, first you need to append a proxy rule in
 
 ```yaml
 registryMirror:
-    # When enable, using header "X-Dragonfly-Registry" for remote instead of url.
-    dynamic: true
-    # URL for the registry mirror.
-    url:  <your.private.registry>
-    # Whether to ignore https certificate errors.
-    insecure: false
-    # Optional certificates if the remote server uses self-signed certificates.
-    certs: []
-    # Whether to request the remote registry directly.
-    direct: false
-    # Whether to use proxies to decide if dragonfly should be used.
-    useProxies: false
+  # When enable, using header "X-Dragonfly-Registry" for remote instead of url.
+  dynamic: true
+  # URL for the registry mirror.
+  url: <your.private.registry>
+  # Whether to ignore https certificate errors.
+  insecure: false
+  # Optional certificates if the remote server uses self-signed certificates.
+  certs: []
+  # Whether to request the remote registry directly.
+  direct: false
+  # Whether to use proxies to decide if dragonfly should be used.
+  useProxies: false
 proxy:
   proxies:
     # proxy all http image layer download requests with dfget
     - regx: blobs/sha256.*
     - regx: manifests/sha256.*
 hijackHTTPS:
-    # Key pair used to hijack https requests.
-    cert: ca.crt
-    key: ca.key
-    hosts:
-      - regx: <your.private.registry>
+  # Key pair used to hijack https requests.
+  cert: ca.crt
+  key: ca.key
+  hosts:
+    - regx: <your.private.registry>
 ```
 
-### Step 3: Pull images with proxy {#step-4-pull-images-with-proxy}
+## Step 3: Pull images with proxy {#step-4-pull-images-with-proxy}
 
 Through the above steps, we can start to validate if Dragonfly works as expected.
 
 And you can pull the image through proxy as below:
 
 ```bash
-   no_proxy='' NO_PROXY='' HTTPS_PROXY=127.0.0.1:65001 singularity pull  oras://hostname/path/image:tag
+no_proxy='' NO_PROXY='' HTTPS_PROXY=127.0.0.1:65001 singularity pull  oras://hostname/path/image:tag
 ```
 
 ## Step 4: Validate Dragonfly {#step-4-validate-dragonfly}
@@ -125,5 +122,3 @@ If the output of command above has content like
    "component":"PeerTask"
 }
 ```
-
-This indicates mirror download happend through dragonfly.

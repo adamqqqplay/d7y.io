@@ -1,6 +1,6 @@
 ---
 id: containerd-proxy
-title: Http Proxy mode
+title: HTTP Proxy Mode
 slug: /setup/runtime/containerd/proxy
 ---
 

@@ -22,5 +22,9 @@
   "item.label.Video": {
     "message": "视频",
     "description": "Navbar item with label Video"
+  },
+  "logo.alt": {
+    "message": "Dragonfly",
+    "description": "The alt text of navbar logo"
   }
 }

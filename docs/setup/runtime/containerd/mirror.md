@@ -1,6 +1,6 @@
 ---
 id: containerd-mirror
-title: Mirror mode
+title: Mirror Mode
 slug: /setup/runtime/containerd/mirror
 ---
 
@@ -9,9 +9,7 @@ Use dfget daemon for containerd
 From v1.1.0, Containerd supports registry mirrors,
 we can configure Containerd via this feature for HA.
 
-## Quick Start {#quick-start}
-
-### Step 1: Configure dfget daemon {#step-1-configure-dfget-daemon}
+## Step 1: Configure dfget daemon {#step-1-configure-dfget-daemon}
 
 To use dfget daemon as registry mirror,
 first you need to ensure configuration in `/etc/dragonfly/dfget.yaml`:

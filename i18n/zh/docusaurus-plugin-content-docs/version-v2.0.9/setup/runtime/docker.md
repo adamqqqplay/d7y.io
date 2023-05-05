@@ -10,7 +10,7 @@ slug: /setup/runtime/docker
 
 ## 快速开始
 
-### 第一步：为 http 代理生成 CA 证书
+### 步骤 1：为 http 代理生成 CA 证书
 
 生成一个 CA 证书私钥。
 
@@ -57,7 +57,7 @@ openssl x509 -req -days 36500 -extfile openssl.conf \
     -extensions v3_ca -in ca.csr -signkey ca.key -out ca.crt
 ```
 
-### 第二步：配置 dfget daemon
+### 步骤 2：配置 dfget daemon
 
 为了将 dfget daemon 作为 http 代理使用，首先你需要在 `/var/log/dragonfly/dfget.yaml` 中增加一条代理规则，
 它将会代理 `your.private.registry` 对镜像层的请求：
@@ -79,7 +79,7 @@ proxy:
       - regx: your.private.registry
 ```
 
-### 第三步：配置 Docker daemon
+### 步骤 3：配置 Docker daemon
 
 为了忽略您的证书错误，您需要在
 `/etc/docker/daemon.json` 中把 `insecure-registries` 设置为您的私有代理：
@@ -90,7 +90,7 @@ proxy:
 }
 ```
 
-### 第四步：继续配置 Docker daemon
+### 步骤 4：继续配置 Docker daemon
 
 在 `/etc/systemd/system/docker.service.d/http-proxy.conf` 设置 dfdaemon 为
 docker daemon 的 `HTTP_PROXY` 和 `HTTPS_PROXY` 代理：
@@ -101,7 +101,7 @@ Environment="HTTP_PROXY=http://127.0.0.1:65001"
 Environment="HTTPS_PROXY=http://127.0.0.1:65001"
 ```
 
-### 第五步：使用代理拉取镜像
+### 步骤 5：使用代理拉取镜像
 
 完成以上的步骤后，我们可以尝试验证 Dragonfly 是否像我们预期的一样正常工作。
 

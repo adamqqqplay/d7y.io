@@ -1,13 +1,13 @@
 ---
 id: containerd
 title: Containerd
-slug: /setup/runtime/containerd/
+slug: /setup/runtime/containerd
 ---
 
-This documentation will help you to integrate Dragonfly2 into
-Containerd. We recommend to use `mirror`.
+This documentation will help you to integrate Dragonfly into
+Containerd. We recommend to use `Mirror Mode`.
 
 Table of contents:
 
-- [mirror](./containerd/mirror.md)
-- [proxy](./containerd/proxy.md)
+- [Mirror Mode](./containerd/mirror.md)
+- [Http Proxy Mode](./containerd/proxy.md)

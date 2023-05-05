@@ -8,9 +8,7 @@ slug: /setup/runtime/containerd/mirror
 
 从 v1.1.0 开始，Containerd 支持镜像仓库。
 
-## 快速开始
-
-### 步骤 1: 配置 dfdaemon
+## 步骤 1: 配置 dfdaemon
 
 下面为镜像仓库的 dfdaemon 配置，在路径 `/etc/dragonfly/dfget.yaml`:
 
@@ -113,13 +111,13 @@ bash gen-containerd-hosts.sh example.com
 
 > 镜像仓库配置详细文档参照: <https://github.com/containerd/containerd/blob/main/docs/hosts.md#registry-configuration---examples>
 
-## Step 3: 重启 Containerd
+## 步骤 3: 重启 Containerd
 
 ```shell
 systemctl restart containerd
 ```
 
-## Step 4: 拉取镜像
+## 步骤 4: 拉取镜像
 
 使用以下命令拉取镜像:
 
@@ -127,7 +125,7 @@ systemctl restart containerd
 crictl pull docker.io/library/busybox
 ```
 
-## Step 5: 验证 Dragonfly 拉取成功
+## 步骤 5: 验证 Dragonfly 拉取成功
 
 可以查看日志，判断 busybox 镜像正常拉取。
 

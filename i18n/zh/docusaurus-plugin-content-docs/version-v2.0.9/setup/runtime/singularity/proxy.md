@@ -1,21 +1,20 @@
 ---
 id: singularity-proxy
-title: HTTP Proxy Mode
+title: HTTP Proxy 模式
 slug: /setup/runtime/singularity/proxy
 ---
 
-Uses dfget daemon as http proxy for Singularity/Apptainer.
+使用 dfget daemon 作为 Singularity/Apptainer 的 http 代理。
 
-## Step 1: Generate CA certificate for HTTP proxy {#step-1-generate-ca-certificate-for-http-proxy}
+## 步骤 1：为 http 代理生成 CA 证书
 
-Generate an RSA private key.
+生成一个 CA 证书私钥。
 
 ```bash
 openssl genrsa -out ca.key 2048
 ```
 
-Create openssl config file `openssl.conf`.
-Note set `basicConstraints` to true, that you can modify the values.
+打开 openssl 配置文件 `openssl.conf`。设置 `basicConstraints` 为 true，然后您就能修改这些值。
 
 ```text
 [ req ]
@@ -49,19 +48,18 @@ challengePassword_max = 20
 basicConstraints         = CA:TRUE
 ```
 
-Generate the CA certificate.
+生成 CA 证书。
 
 ```bash
 openssl req -new -key ca.key -nodes -out ca.csr -config openssl.conf
 openssl x509 -req -days 36500 -extfile openssl.conf \
-    -extensions v3_ca -in ca.csr -signkey ca.key -out ca.crt
+      -extensions v3_ca -in ca.csr -signkey ca.key -out ca.crt
 ```
 
-## Step 2: Configure dfget daemon {#step-2-configure-dfget-daemon}
+## 步骤 2：配置 dfget daemon
 
-To use dfget daemon as HTTP proxy, first you need to append a proxy rule in
-`/etc/dragonfly/dfget.yaml`, This will proxy
-`your.private.registry's` requests for image layers:
+为了将 dfget daemon 作为 http 代理使用，首先你需要在 `/etc/dragonfly/dfget.yaml` 中增加一条代理规则，
+它将会代理 `your.private.registry` 对镜像层的请求：
 
 ```yaml
 registryMirror:
@@ -90,26 +88,21 @@ hijackHTTPS:
     - regx: <your.private.registry>
 ```
 
-## Step 3: Pull images with proxy {#step-4-pull-images-with-proxy}
-
-Through the above steps, we can start to validate if Dragonfly works as expected.
-
-And you can pull the image through proxy as below:
+## 步骤 3：使用代理拉取镜像
 
 ```bash
-no_proxy='' NO_PROXY='' HTTPS_PROXY=127.0.0.1:65001 singularity pull  oras://hostname/path/image:tag
+no_proxy='' NO_PROXY='' HTTPS_PROXY=127.0.0.1:65001 singularity pull oras://hostname/path/image:tag
 ```
 
-## Step 4: Validate Dragonfly {#step-4-validate-dragonfly}
+## 步骤 4: 验证 Dragonfly 拉取成功
 
-You can execute the following command to
-check if the image is distributed via Dragonfly.
+可以查看日志，判断镜像正常拉取。
 
 ```shell
 grep "peer task done" /var/log/dragonfly/daemon/core.log
 ```
 
-If the output of command above has content like
+如果正常日志输出如下:
 
 ```shell
 {

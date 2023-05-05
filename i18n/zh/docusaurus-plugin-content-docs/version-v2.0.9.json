@@ -70,5 +70,9 @@
   "sidebar.docs.category.Configuration": {
     "message": "配置",
     "description": "The label for category Configuration in sidebar docs"
+  },
+  "sidebar.docs.category.Singularity/Apptainer": {
+    "message": "Singularity/Apptainer",
+    "description": "The label for category Singularity/Apptainer in sidebar docs"
   }
 }

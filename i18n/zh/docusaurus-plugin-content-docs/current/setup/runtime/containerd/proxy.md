@@ -1,17 +1,17 @@
 ---
 id: containerd-proxy
-title: Http Proxy 模式
+title: HTTP Proxy 模式
 slug: /setup/runtime/containerd/proxy
 ---
 
-使用 dfget daemon 作为 containerd 的 http 代理
+使用 dfget daemon 作为 containerd 的 http 代理。
 
 目前 containerd 的 `ctr` 命令不支持带有
 registry-mirrors 的私有注册表，为此我们需要为 containerd 使用 HTTP 代理。
 
 ## 快速开始
 
-### 第一步：为 http 代理生成 CA 证书
+### 步骤 1：为 http 代理生成 CA 证书
 
 生成一个 CA 证书私钥。
 
@@ -61,7 +61,7 @@ openssl x509 -req -days 36500 -extfile openssl.conf \
       -extensions v3_ca -in ca.csr -signkey ca.key -out ca.crt
 ```
 
-### 第二步：配置 dfget daemon
+### 步骤 2：配置 dfget daemon
 
 为了将 dfget daemon 作为 http 代理使用，首先你需要在 `/etc/dragonfly/dfget.yaml` 中增加一条代理规则，
 它将会代理 `your.private.registry` 对镜像层的请求：
@@ -83,7 +83,7 @@ proxy:
       - regx: your.private.registry
 ```
 
-### 第三步：配置 containerd
+### 步骤 3：配置 containerd
 
 在 `/etc/systemd/system/containerd.service.d/http-proxy.conf`
 设置 dfdaemon 为 docker daemon 的 `HTTP_PROXY` 和 `HTTPS_PROXY` 代理：
@@ -94,7 +94,7 @@ Environment="HTTP_PROXY=http://127.0.0.1:65001"
 Environment="HTTPS_PROXY=http://127.0.0.1:65001"
 ```
 
-### 第四步：使用代理拉取镜像
+### 步骤 4：使用代理拉取镜像
 
 完成以上的步骤后，我们可以尝试验证 Dragonfly 是否像我们预期的一样正常工作。
 

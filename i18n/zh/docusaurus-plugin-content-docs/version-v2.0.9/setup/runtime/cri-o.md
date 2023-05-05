@@ -6,7 +6,7 @@ slug: /setup/runtime/cri-o
 
 使用 dfdaemon 支持 CRI-O
 
-## Step 1: 配置 Dragonfly
+## 步骤 1: 配置 Dragonfly
 
 下面为镜像仓库的 dfdaemon 配置，在路径 `/etc/dragonfly/dfget.yaml`:
 
@@ -25,7 +25,7 @@ proxy:
 
 上面配置会拦截所有 `https://index.docker.io` 的镜像。
 
-## Step 2: 配置 CRI-O
+## 步骤 2: 配置 CRI-O
 
 启动 CRI-O 镜像仓库配置 `/etc/containers/registries.conf`:
 
@@ -37,7 +37,7 @@ location = "docker.io"
   insecure = true
 ```
 
-## Step 3: 重启 CRI-O
+## 步骤 3: 重启 CRI-O
 
 ```shell
 systemctl restart crio
@@ -46,7 +46,7 @@ systemctl restart crio
 如果遇到如下错误 `mixing sysregistry v1/v2 is not supported` 或
 `registry must be in v2 format but is in v1`, 请将您的镜像仓库配置为 v2。
 
-## Step 4: 拉取镜像
+## 步骤 4: 拉取镜像
 
 使用以下命令拉取镜像:
 
@@ -54,7 +54,7 @@ systemctl restart crio
 crictl pull docker.io/library/busybox
 ```
 
-## Step 5: 验证 Dragonfly 拉取成功
+## 步骤 5: 验证 Dragonfly 拉取成功
 
 可以查看日志，判断 busybox 镜像正常拉取。
 
