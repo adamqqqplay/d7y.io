@@ -5,6 +5,13 @@ title: Nydus
 
 This document will help you experience how to use dragonfly with nydus.
 
+## Deploy using helm {#deploy-using-helm}
+
+We **recommend** use Helm to deploy both Dragonfly and nydus, which is easier to get started.
+
+You can refer to [**Quick Start**](https://github.com/dragonflyoss/helm-charts/blob/main/INSTALL.md)
+to deploy Dragonfly and nydus.
+
 ## Prerequisites {#prerequisites}
 
 <!-- markdownlint-disable -->

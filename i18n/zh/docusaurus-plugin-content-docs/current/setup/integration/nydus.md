@@ -5,6 +5,12 @@ title: Nydus
 
 本文档将帮助您将 Dragonfly 与 Nydus 一起使用。
 
+## 使用 helm 部署
+
+我们**推荐**使用 Helm 来同时部署 Dragonfly 和 nydus，这种部署方法更加容易上手。
+
+您可以参考 [**快速入门**](https://github.com/dragonflyoss/helm-charts/blob/main/INSTALL.md) 来部署 Dragonfly 和 nydus。
+
 ## 依赖
 
 <!-- markdownlint-disable -->
